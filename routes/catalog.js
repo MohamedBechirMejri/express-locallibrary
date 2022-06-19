@@ -14,10 +14,10 @@ const bookInstanceController = require("../controllers/bookinstanceController");
 router.get("/", bookController.index);
 
 // GET request for creating a Book. NOTE This must come before routes that display Book (uses id).
-router.get("/book/create", bookController.bookCreate_get);
+router.get("/book/create", bookController.book_create_get);
 
 // POST request for creating Book.
-router.post("/book/create", bookController.bookCreate_post);
+router.post("/book/create", bookController.book_create_post);
 
 // GET request to delete Book.
 router.get("/book/:id/delete", bookController.book_delete_get);
@@ -40,10 +40,10 @@ router.get("/books", bookController.book_list);
 /// AUTHOR ROUTES ///
 
 // GET request for creating Author. NOTE This must come before route for id (i.e. display author).
-router.get("/author/create", authorController.authorCreate_get);
+router.get("/author/create", authorController.author_create_get);
 
 // POST request for creating Author.
-router.post("/author/create", authorController.authorCreate_post);
+router.post("/author/create", authorController.author_create_post);
 
 // GET request to delete Author.
 router.get("/author/:id/delete", authorController.author_delete_get);
@@ -66,10 +66,10 @@ router.get("/authors", authorController.author_list);
 /// GENRE ROUTES ///
 
 // GET request for creating a Genre. NOTE This must come before route that displays Genre (uses id).
-router.get("/genre/create", genreController.genreCreate_get);
+router.get("/genre/create", genreController.genre_create_get);
 
 // POST request for creating Genre.
-router.post("/genre/create", genreController.genreCreate_post);
+router.post("/genre/create", genreController.genre_create_post);
 
 // GET request to delete Genre.
 router.get("/genre/:id/delete", genreController.genre_delete_get);
@@ -94,13 +94,13 @@ router.get("/genres", genreController.genre_list);
 // GET request for creating a BookInstance. NOTE This must come before route that displays BookInstance (uses id).
 router.get(
   "/bookinstance/create",
-  bookInstanceController.bookinstanceCreate_get
+  bookInstanceController.bookinstance_create_get
 );
 
 // POST request for creating BookInstance.
 router.post(
   "/bookinstance/create",
-  bookInstanceController.bookinstanceCreate_post
+  bookInstanceController.bookinstance_create_post
 );
 
 // GET request to delete BookInstance.

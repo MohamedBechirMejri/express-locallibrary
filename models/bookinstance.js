@@ -1,3 +1,4 @@
+const { DateTime } = require("luxon");
 const mongoose = require("mongoose");
 
 const BookInstanceSchema = new mongoose.Schema({
@@ -21,10 +22,14 @@ const BookInstanceSchema = new mongoose.Schema({
   },
 });
 
-// eslint-disable-next-line func-names
-BookInstanceSchema.virtual("url").get(function () {
-  // eslint-disable-next-line no-underscore-dangle
-  return `/catalog/bookinstance/${this._id}`;
-});
+BookInstanceSchema.virtual("url").get(
+  () =>
+    // eslint-disable-next-line no-underscore-dangle
+    `/catalog/bookinstance/${this._id}`
+);
+
+BookInstanceSchema.virtual("due_back_formatted").get(() =>
+  DateTime.fromJSDate(this.due_back).toLocaleString(DateTime.DATE_MED)
+);
 
 module.exports = mongoose.model("BookInstance", BookInstanceSchema);

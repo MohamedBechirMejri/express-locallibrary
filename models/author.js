@@ -32,4 +32,10 @@ AuthorSchema.virtual("url").get(function () {
   return `/catalog/author/${this._id}`;
 });
 
+AuthorSchema.virtual("lifespan_formatted").get(function () {
+  return this.date_of_birth && this.date_of_death
+    ? `${this.date_of_birth.getFullYear()} - ${this.date_of_death.getFullYear()}`
+    : "";
+});
+
 module.exports = mongoose.model("Author", AuthorSchema);

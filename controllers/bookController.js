@@ -10,20 +10,20 @@ const BookInstance = require("../models/bookinstance");
 exports.index = (req, res) => {
   async.parallel(
     {
-      book_count() {
-        Book.countDocuments({});
+      book_count(callback) {
+        Book.countDocuments({}, callback);
       },
-      book_instance_count() {
-        BookInstance.countDocuments({});
+      book_instance_count(callback) {
+        BookInstance.countDocuments({}, callback);
       },
-      book_instance_available_count() {
-        BookInstance.countDocuments({ status: "Available" });
+      book_instance_available_count(callback) {
+        BookInstance.countDocuments({ status: "Available" }, callback);
       },
-      author_count() {
-        Author.countDocuments({});
+      author_count(callback) {
+        Author.countDocuments({}, callback);
       },
-      genre_count() {
-        Genre.countDocuments({});
+      genre_count(callback) {
+        Genre.countDocuments({}, callback);
       },
     },
     (err, results) => {

@@ -5,9 +5,10 @@ const GenreSchema = mongoose.Schema({
 });
 
 GenreSchema.virtual("url").get(
-  () =>
-    // eslint-disable-next-line no-underscore-dangle
-    `/catalog/genre/${this._id}`
+  function () // eslint-disable-next-line no-underscore-dangle
+  {
+    return `/catalog/genre/${this._id}`;
+  }
 );
 
 module.exports = mongoose.model("Genre", GenreSchema);

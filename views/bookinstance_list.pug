@@ -14,7 +14,7 @@ block content
                 else
                     span.text-warning #{bi.status}
                 if bi.status!='Available'
-                    span  (Due: #{bi.due_back} )
+                    span  (Due: #{bi.due_back_formatted} )
 
         else
             li There are no book copies in this library.

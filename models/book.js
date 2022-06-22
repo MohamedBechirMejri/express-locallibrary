@@ -18,10 +18,12 @@ const BookSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  genre: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Genre",
-  },
+  genre: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Genre",
+    },
+  ],
 });
 
 // eslint-disable-next-line func-names

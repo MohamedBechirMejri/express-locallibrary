@@ -53,7 +53,7 @@ exports.genre_detail = function (req, res, next) {
 };
 
 // Display Genre create form on GET.
-exports.genre_create_get = function (req, res) {
+exports.genre_create_get = function (req, res, next) {
   res.render("genre_form", { title: "Create Genre" });
 };
 

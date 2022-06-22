@@ -1,4 +1,8 @@
+/* eslint-disable consistent-return */
+const { body, validationResult } = require("express-validator");
+
 const BookInstance = require("../models/bookinstance");
+const Book = require("../models/book");
 
 // Display list of all BookInstances.
 exports.bookinstance_list = (req, res) => {
@@ -37,8 +41,17 @@ exports.bookinstance_detail = function (req, res, next) {
 };
 
 // Display BookInstance create form on GET.
-exports.bookinstance_create_get = (req, res) => {
-  res.send("NOT IMPLEMENTED: BookInstance create GET");
+exports.bookinstance_create_get = function (req, res, next) {
+  Book.find({}, "title").exec((err, books) => {
+    if (err) {
+      return next(err);
+    }
+    // Successful, so render.
+    res.render("bookinstance_form", {
+      title: "Create BookInstance",
+      book_list: books,
+    });
+  });
 };
 
 // Handle BookInstance create on POST.

@@ -7,12 +7,12 @@ block content
         a(href=book.author.url) #{book.author.name}
     p #[strong Summary:] #{book.summary}
     p #[strong ISBN:] #{book.isbn}
-    if genre
-        p #[strong Genre:]
-            each val, index in book.genre
-                a(href=val.url) #{val.name}
-                if index < book.genre.length - 1
-                    |,
+
+    p #[strong Genre:]
+        each val, index in book.genre
+            a(href=val.url) #{val.name}
+            if index < book.genre.length - 1
+                |,
 
     div(style='margin-left:20px;margin-top:20px')
         h4 Copies

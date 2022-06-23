@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable consistent-return */
 /* eslint-disable no-console */
 const async = require("async");
@@ -259,8 +260,49 @@ exports.book_delete_post = (req, res, next) => {
 };
 
 // Display book update form on GET.
-exports.book_update_get = (req, res) => {
-  res.send("NOT IMPLEMENTED: Book update GET");
+exports.book_update_get = function (req, res, next) {
+  // Get book, authors and genres for form.
+  async.parallel(
+    {
+      book(callback) {
+        Book.findById(req.params.id)
+          .populate("author")
+          .populate("genre")
+          .exec(callback);
+      },
+      authors(callback) {
+        Author.find(callback);
+      },
+      genres(callback) {
+        Genre.find(callback);
+      },
+    },
+    (err, results) => {
+      if (err) {
+        return next(err);
+      }
+      if (results.book == null) {
+        // No results.
+        const errr = new Error("Book not found");
+        errr.status = 404;
+        return next(errr);
+      }
+
+      results.genres.forEach((genre, index) => {
+        if (genre._id.toString() === results.book.genre[index]._id.toString()) {
+          // eslint-disable-next-line no-param-reassign
+          genre.checked = "true";
+        }
+      });
+
+      res.render("book_form", {
+        title: "Update Book",
+        authors: results.authors,
+        genres: results.genres,
+        book: results.book,
+      });
+    }
+  );
 };
 
 // Handle book update on POST.

@@ -289,10 +289,14 @@ exports.book_update_get = function (req, res, next) {
       }
 
       results.genres.forEach((genre, index) => {
-        if (genre._id.toString() === results.book.genre[index]._id.toString()) {
-          // eslint-disable-next-line no-param-reassign
-          genre.checked = "true";
-        }
+        results.book.genre.forEach(bookGenre => {
+          if (bookGenre.equals(genre._id)) {
+            if (genre._id.toString() === bookGenre._id.toString()) {
+              // eslint-disable-next-line no-param-reassign
+              genre.checked = "true";
+            }
+          }
+        });
       });
 
       res.render("book_form", {

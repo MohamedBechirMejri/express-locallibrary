@@ -13,12 +13,15 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const sassMiddleware = require("node-sass-middleware");
+const compression = require("compression");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const catalogRouter = require("./routes/catalog"); // Import routes for "catalog" area of site
 
 const app = express();
+
+app.use(compression()); // Compress all routes
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
